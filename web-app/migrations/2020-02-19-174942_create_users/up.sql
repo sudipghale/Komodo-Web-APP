@@ -1,0 +1,6 @@
+CREATE TABLE account (
+  id SERIAL PRIMARY KEY,
+  email VARCHAR NOT NULL,
+  username VARCHAR NOT NULL,
+  password TEXT NOT NULL
+)
