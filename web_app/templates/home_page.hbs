@@ -1,0 +1,133 @@
+<head>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="icon" href="data:;base64,=">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+
+<script>
+    $(document).ready(function()
+{
+    var navItems = $('.admin-menu li > a');
+    var navListItems = $('.admin-menu li');
+    var allWells = $('.admin-content');
+    var allWellsExceptFirst = $('.admin-content:not(:first)');
+    
+    allWellsExceptFirst.hide();
+    navItems.click(function(e)
+    {
+        e.preventDefault();
+        navListItems.removeClass('active');
+        $(this).closest('li').addClass('active');
+        
+        allWells.hide();
+        var target = $(this).attr('data-target-id');
+        $('#' + target).show();
+    });
+});
+</script>
+<style>
+    @import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
+    body{margin-top:20px;}
+    .fa-fw {width: 2em;}
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="nav nav-pills nav-stacked admin-menu">
+                <li class="active"><a href="#" data-target-id="home"><i class="fa fa-home fa-fw"></i>Home</a></li>
+                <li><a href="#" data-target-id="SendMoney"><i class="fa fa-arrow-circle-left fa-fw"></i>Send Money</a></li>
+                <li><a href="#" data-target-id="RequestMoney"><i class="fa fa-arrow-circle-right fa-fw"></i>Request Money</a></li>
+                <li><a href="#" data-target-id="Settings"><i class="fa fa-cogs fa-fw"></i>Settings</a></li>
+                <li>
+                    <form action="/logout" method="post" name ="logout" accept-charset="utf-8">
+                   
+                    <a href="#" data-target-id="LogOut" onclick="document.forms[0].submit();return flase;"><i class="fa fa-power-off fa-fw"></i>Log Out</a>
+                </form>
+                </li>
+                
+            </ul>
+        </div>
+        <div class="col-md-9 well admin-content" id="home">
+            <p>
+                Your current balance is:  {{ amount }} Kennycoins. <br>
+                You suck.
+            </p>
+            <p>
+                Here's the original one;
+                <br>
+                Thank you Baumik!
+            </p>
+        </div>
+        <div class="col-md-9 well admin-content" id="SendMoney">
+            <p>
+            Here you can send money to other users given their address and the decimal value of Kennycoins you wish to send.
+            Submitting will result in sending them the amount through Komodo and send you to a confirmation page.
+            </p>
+            <section id="inner-wrapper" class="SendMoney">
+                <article>
+                    <form action="/send_money_post" method="post" accept-charset="utf-8">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user"> </i></span>
+                                <input type="text" class="form-control" placeholder="Address" name="address" id="address">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope"> </i></span>
+                                <input type="number" class="form-control" placeholder="0.00" step="0.00000000000000001" name ="amount" id="amount">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-comment"> </i></span>
+                                <input type="text" class="form-control" placeholder="Comment" name="comment" id="comment">
+                            </div>
+                        </div>
+                        <input type="submit" class="btn btn-success btn-block" value="Send Money"></button>
+                    </form>
+                </article>
+            </section>
+        </div>
+        <div class="col-md-9 well admin-content" id="RequestMoney">
+            <p>
+            Here you can send a request for a certain amount from another user. 
+            This can be done in the same way as sending money given the address and decimal amount.
+            </p>
+            <section id="inner-wrapper" class="RequestMoney">
+                <article>
+                    <form action="requestconfirm" method="GET">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user"> </i></span>
+                                <input type="text" class="form-control" placeholder="Address" id="Address">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope"> </i></span>
+                                <input type="number" class="form-control" placeholder="0.00" step="0.00000000000000001" id="MoneyAmt">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-comment"> </i></span>
+                                <input type="text" class="form-control" placeholder="Comment" name="comment" id="comment">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">Submit</button>
+                    </form>
+                </article>
+            </section>
+        </div>
+        <div class="col-md-9 well admin-content" id="Settings">
+            Settings
+        </div>
+        <div class="col-md-9 well admin-content" id="LogOut">
+            Charts
+        </div>
+
+    </div>
+</div>

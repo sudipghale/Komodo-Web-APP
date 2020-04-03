@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width" />
+      <title>Send money</title>
+   </head>
+   <body>
+    <h1>Send money</h1>
+
+    <p>Please fill out the money form.</p>
+
+        {{#if flash}}
+           <p>{{#if flash_type}}{{flash_type}}: {{/if}}{{ flash }}</p>
+        {{/if}}
+
+        <form action="/send_money_post" method="post" accept-charset="utf-8">
+           <label for="address">address</label>
+                <input type="text" name="address" id="address" value="" />
+           <label for="amount">amount</label>
+                <input type="text" name="amount" id="amount" value="" />
+            <label for="comment">comment</label>
+                <input type="text" name="comment" id="comment" value="" />
+           <p><input type="submit" value="Send this money"></p>
+        </form>
+   </body>
+</html>
