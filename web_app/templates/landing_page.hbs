@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    nav {
+      margin-bottom: 0;
+      border-radius: 0;
+      background-color: #1F2833;
+
+    }
+
+    .site-header{
+
+    }
+    .site-header .layout-hero {
+      min-height: 50vh;
+
+    }
+    .site-header .jumbotron {
+      background-color:#C5C6C7;
+
+    }
+
+    .site-header .page-section-title{
+      font-size: 3em;
+    }
+    .site-header .page-section-text{
+      font-size: 1.2em;
+    }
+
+    
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #1F2833;   
+      color: aliceblue;
+      padding: 15px;
+      font-weight: 200;
+    }
+  </style>
+</head>
+<body>
+
+<header id="page-hero" class="site-header">
+  
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="#">KPay</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="nav-item active"><a href="#">Home</a></li>
+          <li class="nav-item"><a href="#">About Us</a></li>
+          <li class="nav-item"><a href="#">Services</a></li>
+          <li class="nav-item"><a href="#">Contact</a></li> 
+          
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="signup"><span class="glyphicon glyphicon-log-in"></span> Sign Up</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="mainpage"><span class="glyphicon glyphicon-log-in"></span> Main Page</a></li>
+        </ul>
+        </div>
+    </div>
+  </nav>
+  
+  <section class="layout-hero jumbotron text-center" >
+    <div class="container">
+           <h3 class="page-section-title">Build for KennyCoin</h3>
+           <p class="page-section-text">GitHub is a development platform inspired by the way you work. From open source to business, you can host and review code, manage projects, and build software alongside 40 million developers. </p>
+     
+    </div>
+   
+  </section>
+  
+  <div class="jumbotron">
+    <div class="container text-center">
+      <h1 class="page-section-title">My Portfolio</h1>      
+      <p class="page-section-text">Some text that represents "Me"...</p>
+    </div>
+  </div>
+    
+</header>
+
+
+<!-- Footer -->
+<footer class="container-fluid text-center">
+  <p> Discover our sponsor <a href="https://komodoplatform.com/">komodo blockchain</a></p> 
+</footer>
+
+</body>
+</html>
