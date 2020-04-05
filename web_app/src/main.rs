@@ -3,12 +3,13 @@
 #[macro_use]
 extern crate rocket;
 extern crate rocket_contrib;
+extern crate rustc_serialize;
 
 mod komodo;
 mod komodorpcutil;
 use komodorpcutil::KomodoRPC;
 
-use serde::{Deserialize, Serialize};
+use rustc_serialize::json::Json;
 use std::collections::HashMap;
 
 use rocket::http::{Cookie, Cookies};
@@ -16,13 +17,6 @@ use rocket::outcome::IntoOutcome;
 use rocket::request::{self, FlashMessage, Form, FromRequest, Request};
 use rocket::response::{Flash, Redirect};
 use rocket_contrib::templates::Template;
-
-#[derive(Serialize, Deserialize, Debug)]
-struct Amount {
-    result: f64,
-    error: String,
-    id: String,
-}
 
 #[derive(FromForm)]
 struct Login {
@@ -164,16 +158,10 @@ fn user_index(user: User) -> Template {
         someJSONRPCVer,
         someRPCReqID,
     );
-    let requested_amount = komodo::wallet::get_balance(someUser, None, None);
-    println!("this is test");
-    println!("{:?}", requested_amount);
     let mut context = HashMap::new();
-//   if (requested_amount.is_ok()) {
-//       let de_amnt: Amount = serde_json::from_str(&requested_amount).unwrap();
-         context.insert("amount", "de_amnt.result.to_string()");
-//   } else {
-//       context.insert("amount", "Error".to_string());
-//   }
+    let requested_amount = komodo::wallet::get_balance(someUser, None, None).unwrap();
+    let json = Json::from_str(&requested_amount).unwrap();
+    context.insert("amount", json.find_path(&["result"]).unwrap().to_string());
 
     Template::render("home_page", &context)
 }

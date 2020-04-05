@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>KPay Komodo</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -9,12 +9,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */ 
-    nav {
-      margin-bottom: 0;
-      border-radius: 0;
-      background-color: #1F2833;
-
-    }
+   
 
     .site-header{
 
@@ -23,26 +18,31 @@
       min-height: 50vh;
 
     }
-    .site-header .jumbotron {
-      background-color:#C5C6C7;
-
-    }
-
-    .site-header .page-section-title{
+ 
+     .site-header .page-section-title{
       font-size: 3em;
     }
     .site-header .page-section-text{
       font-size: 1.2em;
     }
 
-    
-    /* Add a gray background color and some padding to the footer */
-    footer {
-      background-color: #1F2833;   
-      color: aliceblue;
-      padding: 15px;
-      font-weight: 200;
+    .site-header .jumbotron_first {
+    background-color: #f4511e;
     }
+    .site-header .jumbotron_second {
+      background-color:lightgray;
+    }
+
+    .logo {
+    color: #f4511e;
+    font-size: 200px;
+  }
+  .site-footer {
+    background-color: lightgray;
+  }
+ 
+
+ 
   </style>
 </head>
 <body>
@@ -61,8 +61,7 @@
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <li class="nav-item active"><a href="#">Home</a></li>
-          <li class="nav-item"><a href="#">About Us</a></li>
+          <li class="nav-item"><a <a href="https://komodoplatform.com/">Komodo</a></li>
           <li class="nav-item"><a href="#">Services</a></li>
           <li class="nav-item"><a href="#">Contact</a></li> 
           
@@ -79,30 +78,108 @@
         </div>
     </div>
   </nav>
+
+  <div class="jumbotron jumbotron_first text-center">
+  <h1>Kpay</h1> 
+  <p>We specialize in Digital Cryptocurrenty</p> 
+  <form class="form-inline">
+    <div class="input-group">
+      <input type="email" class="form-control" size="50" placeholder="Email Address" required>
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-danger">Subscribe</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
   
-  <section class="layout-hero jumbotron text-center" >
-    <div class="container">
-           <h3 class="page-section-title">Build for KennyCoin</h3>
-           <p class="page-section-text">GitHub is a development platform inspired by the way you work. From open source to business, you can host and review code, manage projects, and build software alongside 40 million developers. </p>
+  <section class="layout-hero jumbotron text-center " >
+    <div class="container" style="background-image: url('komodo');"> 
+           <h4 class="page-section-title">RPC API-Library for Komodo-based asset chains, for Rust Developers</h4>
+           <p class="page-section-text">Komodo-RPC library helps you integrate your Rust Apps with Komodo asset-chains without having to setup/implement required RPC functions. Install this Rust library and call Komodo-API RPCs as easily as calling a local function. Komodo-RPC library acts as a wrapper between your Rust app and the Komodo-daemon running on a server. </p>
      
     </div>
    
   </section>
   
-  <div class="jumbotron">
-    <div class="container text-center">
-      <h1 class="page-section-title">My Portfolio</h1>      
-      <p class="page-section-text">Some text that represents "Me"...</p>
+
+  <!-- Page Content -->
+<div class="container">
+  <div class="row">
+    <!-- Team Member 1 -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-0 shadow">
+        <img src="https://source.unsplash.com/TMgQMXoglsM/500x350" class="card-img-top" alt="...">
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">Team Member</h5>
+          <div class="card-text text-black-50">Komodo Master</div>
+        </div>
+      </div>
+    </div>
+
+       <!-- Team Member 2 -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-0 shadow">
+        <img src="https://source.unsplash.com/TMgQMXoglsM/500x350" class="card-img-top" alt="...">
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">Team Member</h5>
+          <div class="card-text text-black-50">Web Master</div>
+        </div>
+      </div>
+    </div>
+    <!-- Team Member 3 -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-0 shadow">
+        <img src="https://source.unsplash.com/TMgQMXoglsM/500x350" class="card-img-top" alt="...">
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">Team Member</h5>
+          <div class="card-text text-black-50">Rust Master</div>
+        </div>
+      </div>
+    </div>
+    <!-- Team Member 4 -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-0 shadow">
+        <img src="https://source.unsplash.com/ZI6p3i9SbVU/500x350" class="card-img-top" alt="...">
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">Team Member</h5>
+          <div class="card-text text-black-50">Rocket Master</div>
+        </div>
+      </div>
+
+   
+</header>
+    <!-- Container (Contact Section) -->
+<div class="container-fluid site-footer">
+  <h2 class="text-center">CONTACT</h2>
+  <div class="row">
+    <div class="col-sm-5">
+      <p>Contact us and we'll get back to you within 24 hours.</p>
+      <p><span class="glyphicon glyphicon-map-marker"></span> University of Texas Arlington</p>
+      <p><span class="glyphicon glyphicon-phone"></span> +00 1515151515</p>
+      <p><span class="glyphicon glyphicon-envelope"></span> kpay_customer@kpay.com</p>
+    </div>
+    <div class="col-sm-7">
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+        </div>
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+        </div>
+      </div>
+      <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <button class="btn btn-default pull-right" type="submit">Send</button>
+        </div>
+      </div>
     </div>
   </div>
-    
-</header>
+</div>
 
 
-<!-- Footer -->
-<footer class="container-fluid text-center">
-  <p> Discover our sponsor <a href="https://komodoplatform.com/">komodo blockchain</a></p> 
-</footer>
 
 </body>
 </html>
