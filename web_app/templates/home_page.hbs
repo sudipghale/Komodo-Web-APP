@@ -29,7 +29,7 @@
 </script>
 <style>
     .btn {
-        background-color: #f4511e;
+        background-color: green;
         color: black;
     }
   
@@ -88,15 +88,23 @@
             </ul>
         </div>
         <div class="col-md-9 well admin-content" id="home">
-            <p>
-                Current Balance= {{ amount }} Kennycoins. <br>
-            </p>
+            <div class="jumbotron">
+                <h3 class="display-3">Welcome to Blockchain World</h3>
+                <p class="lead"></p>
+                <hr class="my-2">
+                <p>Current Balance</p>
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="#" role="button">Current Balance= {{ amount }} Kennycoins.</a>
+                </p>
+            </div>
+ 
       
         </div>
         <div class="col-md-9 well admin-content" id="SendMoney">
-            <p>
-                To transfer your KennyCoins, enter wallet address, amount and note.
-            </p>
+        <h3 class="display-3">
+            To transfer your KennyCoins, enter wallet address, amount and note.
+        </h3>
+
             <section id="inner-wrapper" class="SendMoney">
                 <article>
                     <form action="/send_money_post" method="post" accept-charset="utf-8">
@@ -124,10 +132,9 @@
             </section>
         </div>
         <div class="col-md-9 well admin-content" id="RequestMoney">
-            <p>
+            <h3>
             Here you can send a request for a certain amount from another user. 
-            This can be done in the same way as sending money given the address and decimal amount.
-            </p>
+            </h3>
             <section id="inner-wrapper" class="RequestMoney">
                 <article>
                     <form action="requestconfirm" method="GET">
