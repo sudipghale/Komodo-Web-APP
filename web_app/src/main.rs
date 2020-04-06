@@ -159,9 +159,83 @@ fn user_index(user: User) -> Template {
         someRPCReqID,
     );
     let mut context = HashMap::new();
-    let requested_amount = komodo::wallet::get_balance(someUser, None, None).unwrap();
+    let requested_amount = komodo::wallet::get_balance(someUser.clone(), None, None).unwrap();
     let json = Json::from_str(&requested_amount).unwrap();
     context.insert("amount", json.find_path(&["result"]).unwrap().to_string());
+
+    let control_info = komodo::control::get_info(someUser).unwrap();
+    let control_result = Json::from_str(&control_info).unwrap();
+    let control_json =
+        Json::from_str(&control_result.find_path(&["result"]).unwrap().to_string()).unwrap();
+
+    context.insert(
+        "name",
+        control_json.find_path(&["name"]).unwrap().to_string(),
+    );
+    context.insert(
+        "p2pport",
+        control_json.find_path(&["p2pport"]).unwrap().to_string(),
+    );
+
+    context.insert(
+        "rpcport",
+        control_json.find_path(&["rpcport"]).unwrap().to_string(),
+    );
+
+    context.insert(
+        "balance",
+        control_json.find_path(&["balance"]).unwrap().to_string(),
+    );
+    context.insert(
+        "premine",
+        control_json.find_path(&["premine"]).unwrap().to_string(),
+    );
+    context.insert(
+        "version",
+        control_json.find_path(&["version"]).unwrap().to_string(),
+    );
+
+    context.insert(
+        "protocolversion",
+        control_json
+            .find_path(&["protocolversion"])
+            .unwrap()
+            .to_string(),
+    );
+
+    context.insert(
+        "walletversion",
+        control_json
+            .find_path(&["walletversion"])
+            .unwrap()
+            .to_string(),
+    );
+    context.insert(
+        "blocks",
+        control_json.find_path(&["blocks"]).unwrap().to_string(),
+    );
+    context.insert(
+        "connections",
+        control_json
+            .find_path(&["connections"])
+            .unwrap()
+            .to_string(),
+    );
+    context.insert(
+        "difficulty",
+        control_json.find_path(&["difficulty"]).unwrap().to_string(),
+    );
+    context.insert(
+        "paytxfee",
+        control_json.find_path(&["paytxfee"]).unwrap().to_string(),
+    );
+    context.insert(
+        "relayfee",
+        control_json.find_path(&["relayfee"]).unwrap().to_string(),
+    );
+
+    //template to add
+    //context.insert("variable_name",control_json.find_path(&["json_variable_name"]).unwrap().to_string(
 
     Template::render("home_page", &context)
 }
