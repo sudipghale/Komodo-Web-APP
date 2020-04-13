@@ -4,12 +4,14 @@
 extern crate rocket;
 extern crate rocket_contrib;
 extern crate rustc_serialize;
+extern crate serde_json;
 
 mod komodo;
 mod komodorpcutil;
 use komodorpcutil::KomodoRPC;
 
 use rustc_serialize::json::Json;
+use serde_json::Value as JsonValue;
 use std::collections::HashMap;
 
 use rocket::http::{Cookie, Cookies};
@@ -49,7 +51,7 @@ impl<'a, 'r> FromRequest<'a, 'r> for User {
 
 #[post("/login", data = "<login>")]
 fn login(mut cookies: Cookies, login: Form<Login>) -> Result<Redirect, Flash<Redirect>> {
-    if login.username == "a" && login.password == "a" {
+    if login.username == "user343" && login.password == "user343" {
         cookies.add_private(Cookie::new("user_id", 1.to_string()));
         Ok(Redirect::to(uri!(index)))
     } else {
@@ -163,7 +165,7 @@ fn user_index(user: User) -> Template {
     let json = Json::from_str(&requested_amount).unwrap();
     context.insert("amount", json.find_path(&["result"]).unwrap().to_string());
 
-    let control_info = komodo::control::get_info(someUser).unwrap();
+    let control_info = komodo::control::get_info(someUser.clone()).unwrap();
     let control_result = Json::from_str(&control_info).unwrap();
     let control_json =
         Json::from_str(&control_result.find_path(&["result"]).unwrap().to_string()).unwrap();
@@ -233,6 +235,26 @@ fn user_index(user: User) -> Template {
         "relayfee",
         control_json.find_path(&["relayfee"]).unwrap().to_string(),
     );
+
+    let something = komodo::wallet::list_address_groupings(someUser).unwrap();
+    let res = serde_json::from_str(&something);
+    if res.is_ok() {
+        let p: JsonValue = res.unwrap();
+        context.insert("address1", p["result"][0][0][0].to_string());
+        context.insert("balance1", p["result"][0][0][1].to_string());
+
+        context.insert("address2", p["result"][1][0][0].to_string());
+        context.insert("balance2", p["result"][1][0][1].to_string());
+
+        context.insert("address3", p["result"][0][1][0].to_string());
+        context.insert("balance3", p["result"][0][1][1].to_string());
+
+        println!(
+            "{:?} \t\t\t {:?}\n",
+            p["result"][2][0][0].as_str(),
+            p["result"][2][0][1].as_f64()
+        );
+    }
 
     //template to add
     //context.insert("variable_name",control_json.find_path(&["json_variable_name"]).unwrap().to_string(
