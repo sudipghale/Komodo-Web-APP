@@ -49,9 +49,18 @@ impl<'a, 'r> FromRequest<'a, 'r> for User {
     }
 }
 
+#[get("/signup")]
+fn signup(flash: Option<FlashMessage>) -> Template {
+    let mut context = HashMap::new();
+    if let Some(ref msg) = flash {
+        context.insert("flash", msg.msg());
+    }
+    Template::render("signup", &context)
+}
+
 #[post("/login", data = "<login>")]
 fn login(mut cookies: Cookies, login: Form<Login>) -> Result<Redirect, Flash<Redirect>> {
-    if login.username == "user343" && login.password == "user343" {
+    if login.username == "a" && login.password == "a" {
         cookies.add_private(Cookie::new("user_id", 1.to_string()));
         Ok(Redirect::to(uri!(index)))
     } else {
@@ -274,6 +283,7 @@ fn rocket() -> rocket::Rocket {
         routes![
             index,
             user_index,
+            signup,
             login,
             logout,
             login_user,
