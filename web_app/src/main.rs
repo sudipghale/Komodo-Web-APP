@@ -5,11 +5,13 @@ extern crate rocket;
 extern crate rocket_contrib;
 extern crate rustc_serialize;
 extern crate serde_json;
+extern crate rusqlite;
 
 mod komodo;
 mod komodorpcutil;
 use komodorpcutil::KomodoRPC;
 
+use rusqlite::{params, Connection, Result};
 use rustc_serialize::json::Json;
 use serde_json::Value as JsonValue;
 use std::collections::HashMap;
@@ -25,6 +27,20 @@ struct Login {
     username: String,
     password: String,
 }
+#[derive(FromForm)]
+struct Signup {
+    email: String,
+    psw: String,
+    pswrepeat: String,
+}
+
+#[derive(Debug)]
+struct Person {
+    id: i32,
+    email: String,
+    password: String,
+}
+
 
 #[derive(FromForm)]
 struct Sent {
@@ -48,7 +64,6 @@ impl<'a, 'r> FromRequest<'a, 'r> for User {
             .or_forward(())
     }
 }
-
 #[get("/signup")]
 fn signup(flash: Option<FlashMessage>) -> Template {
     let mut context = HashMap::new();
@@ -58,9 +73,51 @@ fn signup(flash: Option<FlashMessage>) -> Template {
     Template::render("signup", &context)
 }
 
+#[post("/signup", data = "<signup>")]
+fn signup_database(signup: Form<Signup>) -> Result<Redirect, Flash<Redirect>>
+{
+     let conn = Connection::open("db.db").unwrap();
+    let me = Person {
+        id: 0,
+        email: signup.email.to_string(),
+        password: signup.psw.to_string(),
+    };
+    let success = conn.execute(
+        "INSERT INTO person (email, password) VALUES (?1, ?2)",
+        params![me.email, me.password],
+    );
+    if success.unwrap() >0  {
+        Ok(Redirect::to(uri!(login_page)))
+    } else {
+        Err(Flash::error(
+            Redirect::to(uri!(signup)),
+            "Invalid username/password.",
+        ))
+    }
+}
+
+
+
 #[post("/login", data = "<login>")]
 fn login(mut cookies: Cookies, login: Form<Login>) -> Result<Redirect, Flash<Redirect>> {
-    if login.username == "a" && login.password == "a" {
+    let conn = Connection::open("db.db").unwrap();
+    let mut stmt = conn.prepare("SELECT id, email, password FROM person").unwrap();
+    let person_iter = stmt.query_map(params![], |row| {
+        Ok(Person {
+            id: row.get(0)?,
+            email: row.get(1)?,
+            password: row.get(2)?,
+        })
+    }).unwrap();
+    let mut found:bool = false;
+    for person in person_iter {
+        let temp= person.unwrap();
+        if login.username == temp.email && login.password == temp.password {
+            found =true;
+                }
+    }
+
+    if found {
         cookies.add_private(Cookie::new("user_id", 1.to_string()));
         Ok(Redirect::to(uri!(index)))
     } else {
@@ -73,7 +130,7 @@ fn login(mut cookies: Cookies, login: Form<Login>) -> Result<Redirect, Flash<Red
 
 #[get("/login")]
 fn login_user(_user: User) -> Redirect {
-    Redirect::to(uri!(index))
+    Redirect::to(uri!(user_index))
 }
 
 #[get("/login", rank = 2)]
@@ -89,11 +146,11 @@ fn login_page(flash: Option<FlashMessage>) -> Template {
 #[post("/send_money_post", data = "<send>")]
 fn send_money_handler(send: Form<Sent>) -> Result<Redirect, Flash<Redirect>> {
     let someAddress = String::from("127.0.0.1");
-    let somePortNum = 8158;
+    let somePortNum = 13211;
     let someReqMethod = String::from("POST");
-    let someUserName = String::from("user1608438106");
+    let someUserName = String::from("user629608817");
     let somePassword =
-        String::from("pass02e12fd396e2434b74e776c19cd03d32d308ff3c104ab23693acd1988610e5f9b4");
+        String::from("pass6375b5f55e1b166f744d7c66b66354217a6d36645d1de5302c8780bca9600cce49");
     let someJSONRPCVer = String::from("1.0");
     let someRPCReqID = String::from("curltest");
     // CHECK TO SEE IF THERE IS USERNAME IS EMPTY???? TODO
@@ -149,11 +206,11 @@ fn send_page() -> Template {
 #[get("/")]
 fn user_index(user: User) -> Template {
     let someAddress = String::from("127.0.0.1");
-    let somePortNum = 8158;
+    let somePortNum = 13211;
     let someReqMethod = String::from("POST");
-    let someUserName = String::from("user1608438106");
+    let someUserName = String::from("user629608817");
     let somePassword =
-        String::from("pass02e12fd396e2434b74e776c19cd03d32d308ff3c104ab23693acd1988610e5f9b4");
+        String::from("pass6375b5f55e1b166f744d7c66b66354217a6d36645d1de5302c8780bca9600cce49");
     let someJSONRPCVer = String::from("1.0");
     let someRPCReqID = String::from("curltest");
 
@@ -283,13 +340,14 @@ fn rocket() -> rocket::Rocket {
         routes![
             index,
             user_index,
-            signup,
             login,
             logout,
             login_user,
             login_page,
             send_page,
-            send_money_handler
+            send_money_handler,
+            signup,
+            signup_database
         ],
     )
 }
