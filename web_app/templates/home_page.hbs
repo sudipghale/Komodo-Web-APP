@@ -1,364 +1,422 @@
 <head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<link rel="icon" href="data:;base64,=">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="icon" href="data:;base64,=">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 
 <script>
-    $(document).ready(function()
-{
-    var navItems = $('.admin-menu li > a');
-    var navListItems = $('.admin-menu li');
-    var allWells = $('.admin-content');
-    var allWellsExceptFirst = $('.admin-content:not(:first)');
-    
-    allWellsExceptFirst.hide();
-    navItems.click(function(e)
-    {
-        e.preventDefault();
-        navListItems.removeClass('active');
-        $(this).closest('li').addClass('active');
-        
-        allWells.hide();
-        var target = $(this).attr('data-target-id');
-        $('#' + target).show();
+    $(document).ready(function () {
+        var navItems = $('.admin-menu li > a');
+        var navListItems = $('.admin-menu li');
+        var allWells = $('.admin-content');
+        var allWellsExceptFirst = $('.admin-content:not(:first)');
+
+        allWellsExceptFirst.hide();
+        navItems.click(function (e) {
+            e.preventDefault();
+            navListItems.removeClass('active');
+            $(this).closest('li').addClass('active');
+
+            allWells.hide();
+            var target = $(this).attr('data-target-id');
+            $('#' + target).show();
+        });
     });
-});
 </script>
 <style>
-    .balance {
+    .balance {}
 
-    }
     .btn {
-          background-color: #4CAF50; /* Green */
-          border: none;
-          color: white;
-          padding: 10px 40px;
-          text-align: center;
-          text-decoration: none;
-          display: table-cell;
-          font-size: 15px;
-          border-radius: 12px;
-          margin: auto;
-          display: block;
+        background-color: #4CAF50;
+        /* Green */
+        border: none;
+        color: white;
+        padding: 10px 40px;
+        text-align: center;
+        text-decoration: none;
+        display: table-cell;
+        font-size: 15px;
+        border-radius: 12px;
+        margin: auto;
+        display: block;
     }
-   
 
-    body{margin-top:20px;}
-    .fa-fw {width: 2em;}
+
+    body {
+        margin-top: 20px;
+    }
+
+    .fa-fw {
+        width: 2em;
+    }
 </style>
 
 
 <header class="site-header">
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>                        
-        </button>
-        <a class="navbar-brand" href="#">KPay</a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-          <li class="nav-item"><a <a target="_blank" rel="noopener noreferrer" href="https://developers.komodoplatform.com/">Komodo</a></li>
-          <li class="nav-item"><a <a target="_blank" rel="noopener noreferrer" href="https://github.com/ashishmainali/Komodo-API/tree/master/SRC">GitHub</a></li>
-          <li class="nav-item"><a href="#">About Us</a></li>
-          <li class="nav-item"><a href="#">Services</a></li>
-          <li class="nav-item"><a href="#">Contact</a></li> 
-          
-        </ul>
-    
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-              <form action="/logout" method="post" name ="logout" accept-charset="utf-8">
-                   <a href="#" data-target-id="LogOut" onclick="document.forms[0].submit();return flase;"><i class="glyphicon glyphicon-log-in"></i> Log Out</a>
-              </form>
-          </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-        </ul>
-        </div>
-    </div>
-  </nav>
-
-  <div class="container">
-    <div class="row">
-        <nav class="col-md-2">
-            <ul class="nav nav-pills nav-stacked admin-menu">
-                <li class="active"><a href="#" data-target-id="home"><i class="fa fa-home fa-fw"></i>Home</a></li>
-                <li><a href="#" data-target-id="SendMoney"><i class="fa fa-arrow-circle-left fa-fw"></i>Send Money</a></li>
-                <li><a href="#" data-target-id="RequestMoney"><i class="fa fa-arrow-circle-right fa-fw"></i>Request Money</a></li>
-                <li><a href="#" data-target-id="ControlInfo"><i class="fa fa-info fa-fw"></i>Control Info</a></li>
-                <li><a href="#" data-target-id="Settings"><i class="fa fa-cogs fa-fw"></i>Settings</a></li>          
-                 <li><a href="#" data-target-id="Addresses"><i class="fa fa-google-wallet fa-fw"></i>Addresses</a><li/>           
-                 <li><a href="#" data-target-id="Contacts"><i class="fa fa-address-book fa-fw"></i>Contacts</a></li>
-                <li><a href="#" data-target-id="History"><i class="fa fa-history fa-fw"></i>History</a></li>
-
-
-            </ul>
-        </nav>
-
-        <div class="jumbotron col-md-9 well admin-content" id="home">
-            <div>
-                <h3 class="display-3">Hi! user343   ,  </h3>
-                <p class="lead">Welcome to Blockchain World</p>
-                <hr class="my-2">
-                <p>Current Balance</p>
-                <div class="content-section">
-                    <p class=" balance ">{{ amount }} Kennycoins.</p>
-                </div>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">KPay</a>
             </div>
-                 
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item"><a <a target="_blank" rel="noopener noreferrer"
+                            href="https://developers.komodoplatform.com/">Komodo</a></li>
+                    <li class="nav-item"><a <a target="_blank" rel="noopener noreferrer"
+                            href="https://github.com/ashishmainali/Komodo-API/tree/master/SRC">GitHub</a></li>
+                    <li class="nav-item"><a href="#">About Us</a></li>
+                    <li class="nav-item"><a href="#">Services</a></li>
+                    <li class="nav-item"><a href="#">Contact</a></li>
+
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <form action="/logout" method="post" name="logout" accept-charset="utf-8">
+                            <a href="#" data-target-id="LogOut" onclick="document.forms[0].submit();return flase;"><i
+                                    class="glyphicon glyphicon-log-in"></i> Log Out</a>
+                        </form>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                </ul>
+            </div>
         </div>
+    </nav>
 
-        <div class="col-md-7 well admin-content" id="SendMoney">
-        <h3 class="display-3">
-            To transfer your KennyCoins, enter wallet address, amount and note.
-        </h3>
+    <div class="container">
+        <div class="row">
+            <nav class="col-md-2">
+                <ul class="nav nav-pills nav-stacked admin-menu">
+                    <li class="active"><a href="#" data-target-id="home"><i class="fa fa-home fa-fw"></i>Home</a></li>
+                    <li><a href="#" data-target-id="SendMoney"><i class="fa fa-arrow-circle-left fa-fw"></i>Send
+                            Money</a></li>
+                    <li><a href="#" data-target-id="RequestMoney"><i class="fa fa-arrow-circle-right fa-fw"></i>Request
+                            Money</a></li>
+                    <li><a href="#" data-target-id="ControlInfo"><i class="fa fa-info fa-fw"></i>Control Info</a></li>
+                    <li><a href="#" data-target-id="Settings"><i class="fa fa-cogs fa-fw"></i>Settings</a></li>
+                    <li><a href="#" data-target-id="Addresses"><i class="fa fa-google-wallet fa-fw"></i>Addresses</a>
+                        <li />
+                    <li><a href="#" data-target-id="Contacts"><i class="fa fa-address-book fa-fw"></i>Contacts</a></li>
+                    <li><a href="#" data-target-id="History"><i class="fa fa-history fa-fw"></i>History</a></li>
 
-            <section id="inner-wrapper" class="SendMoney">
-                <article>
-                    <form action="/send_money_post" method="post" accept-charset="utf-8">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-user"> </i></span>
-                                <input type="text" class="form-control" placeholder="Address" name="address" id="address">
+
+                </ul>
+            </nav>
+
+            <div class="jumbotron col-md-9 well admin-content" id="home">
+                <div>
+                    <h3 class="display-3">Hi! user343 , </h3>
+                    <p class="lead">Welcome to Blockchain World</p>
+                    <hr class="my-2">
+                    <p>Current Balance</p>
+                    <div class="content-section">
+                        <p class=" balance ">{{ amount }} Kennycoins.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-7 well admin-content" id="SendMoney">
+                <h3 class="display-3">
+                    To transfer your KennyCoins, enter wallet address, amount and note.
+                </h3>
+
+                <section id="inner-wrapper" class="SendMoney">
+                    <article>
+                        <form action="/send_money_post" method="post" accept-charset="utf-8">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user"> </i></span>
+                                    <input type="text" class="form-control" placeholder="Address" name="address"
+                                        id="address">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-bitcoin"> </i></span>
-                                <input type="number" class="form-control" placeholder="0.00" step="0.00000000000000001" name ="amount" id="amount">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-bitcoin"> </i></span>
+                                    <input type="number" class="form-control" placeholder="0.00"
+                                        step="0.00000000000000001" name="amount" id="amount">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-comment"> </i></span>
-                                <input type="text" class="form-control" placeholder="Comment" name="comment" id="comment">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-comment"> </i></span>
+                                    <input type="text" class="form-control" placeholder="Comment" name="comment"
+                                        id="comment">
+                                </div>
                             </div>
-                        </div>
-                        <input type="submit" class="btn btn-success " value="Send Money"></button>
-                    </form>
-                </article>
-            </section>
-        </div>
+                            <input type="submit" class="btn btn-success " value="Send Money"></button>
+                        </form>
+                    </article>
+                </section>
+            </div>
 
-        <div class="col-md-7 well admin-content" id="RequestMoney">
-            <h3>
-            Here you can send a request for a certain amount from another user. 
-            </h3>
-            <section id="inner-wrapper" class="RequestMoney">
-                <article>
-                    <form action="requestconfirm" method="GET">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-user"> </i></span>
-                                <input type="text" class="form-control" placeholder="User" id="Address">
+            <div class="col-md-7 well admin-content" id="RequestMoney">
+                <h3>
+                    Here you can send a request for a certain amount from another user.
+                </h3>
+                <section id="inner-wrapper" class="RequestMoney">
+                    <article>
+                        <form action="requestconfirm" method="GET">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user"> </i></span>
+                                    <input type="text" class="form-control" placeholder="User" id="Address">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-bitcoin"> </i></span>
-                                <input type="number" class="form-control" placeholder="0.00" step="0.00000000000000001" name ="amount" id="amount">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-bitcoin"> </i></span>
+                                    <input type="number" class="form-control" placeholder="0.00"
+                                        step="0.00000000000000001" name="amount" id="amount">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-comment"> </i></span>
-                                <input type="text" class="form-control" placeholder="Comment" name="comment" id="comment">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-comment"> </i></span>
+                                    <input type="text" class="form-control" placeholder="Comment" name="comment"
+                                        id="comment">
+                                </div>
                             </div>
-                        </div>
-                        <button type="submit" class="btn btn-success">Submit</button>
-                    </form>
-                </article>
-            </section>
-        </div>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </form>
+                    </article>
+                </section>
+            </div>
 
-       <div class="col-md-9 well admin-content" id="Addresses">
-          <h2>List Address Groupings</h2>
-          <p>RPC call through the komodo-cli software returning the object with various control details</p>            
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th>Address</th>
-                <th>Balance</th>
-              </tr>
-            </thead>
-            <tbody>
+            <div class="col-md-9 well admin-content" id="Addresses">
+                <h2>List Address Groupings</h2>
+                <p>RPC call through the komodo-cli software returning the object with various control details</p>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Address</th>
+                            <th>Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-              <tr>
-                <td>{{address1}}</td>
-                <td>{{balance1}}</td>
-              </tr>
+                        <tr>
+                            <td>{{address1}}</td>
+                            <td>{{balance1}}</td>
+                        </tr>
 
-               <tr>
-                <td>{{address2}}</td>
-                <td>{{balance2}}</td>
-              </tr>
+                        <tr>
+                            <td>{{address2}}</td>
+                            <td>{{balance2}}</td>
+                        </tr>
 
-              <tr>
-                <td>{{address3}}</td>
-                <td>{{balance3}}</td>
-              </tr>
+                        <tr>
+                            <td>{{address3}}</td>
+                            <td>{{balance3}}</td>
+                        </tr>
 
-        </tbody>
-      </table>
-    </div>
-        
+                    </tbody>
+                </table>
+            </div>
 
-         <div class=" jumbotron col-md-7 well admin-content" id="Contacts">
-             <h3>Contacts</h3> 
-             <p>Prototype</p>
 
-        </div>
+            <div class=" jumbotron col-md-7 well admin-content" id="Contacts">
+                <h3>Contacts</h3>
+                <p>Prototype</p>
+
+            </div>
+
             <div class=" jumbotron col-md-7 well admin-content" id="History">
-             <h3>History</h3> 
-             <p>Prototype</p>
+                <h3>History</h3>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Address</th>
+                            <th>Amount</th>
+                            <th>Category</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{history_0_address}}</td>
+                            <td>{{history_0_amount}}</td>
+                            <td>{{history_0_category}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{history_1_address}}</td>
+                            <td>{{history_1_amount}}</td>
+                            <td>{{history_1_category}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{history_2_address}}</td>
+                            <td>{{history_2_amount}}</td>
+                            <td>{{history_2_category}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>{{history_3_address}}</td>
+                            <td>{{history_3_amount}}</td>
+                            <td>{{history_3_category}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{history_4_address}}</td>
+                            <td>{{history_4_amount}}</td>
+                            <td>{{history_4_category}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+
+            </div>
+
+
+
+            <div class="col-md-9 well admin-content" id="ControlInfo">
+                <h2>Control Info</h2>
+                <p>RPC call through the komodo-cli software returning the object with various control details</p>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Chain Name</td>
+                            <td>String</td>
+                            <td>{{name}}</td>
+                        </tr>
+                        <tr>
+                            <td>P2P Port</td>
+                            <td>Numeric</td>
+                            <td>{{p2pport}}</td>
+                        </tr>
+                        <tr>
+                            <td>RPC Port</td>
+                            <td>Numeric</td>
+                            <td>{{rpcport}}</td>
+                        </tr>
+                        <tr>
+                            <td>Balance</td>
+                            <td>numeric</td>
+                            <td>{{balance}}</td>
+                        </tr>
+                        <tr>
+                            <td>Max Coin</td>
+                            <td>numeric</td>
+                            <td>{{premine}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Version</td>
+                            <td>Numeric</td>
+                            <td>{{version}}</td>
+                        </tr>
+                        <tr>
+                            <td>Protocolversion</td>
+                            <td>Numeric</td>
+                            <td>{{protocolversion}}</td>
+                        </tr>
+                        <tr>
+                            <td>WalletVersion</td>
+                            <td>Numeric</td>
+                            <td>{{walletversion}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Blocks</td>
+                            <td>Numeric</td>
+                            <td>{{blocks}}</td>
+                        </tr>
+                        <tr>
+                            <td>Connections</td>
+                            <td>numeric</td>
+                            <td>{{connections}}</td>
+                        </tr>
+                        <tr>
+                            <td>Difficulty</td>
+                            <td>numeric</td>
+                            <td>{{difficulty}}</td>
+                        </tr>
+                        <tr>
+                            <td>PayTx Fee</td>
+                            <td>numeric</td>
+                            <td>{{paytxfee}}</td>
+                        </tr>
+                        <tr>
+                            <td>Relay Fee</td>
+                            <td>numeric</td>
+                            <td>{{relayfee}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+
+            <div class="jumbotron col-md-9 well admin-content" id="Settings">
+                <h3>
+                    Here you can change the RPC configuration !
+                </h3>
+                <section id="inner-wrapper" class="RequestMoney">
+                    <article>
+                        <form action="requestconfirm" method="GET">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-cog"> </i></span>
+                                    <input type="text" class="form-control" placeholder="userid" name="comment"
+                                        id="comment">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-cog"> </i></span>
+                                    <input type="text" class="form-control" placeholder="password" name="comment"
+                                        id="comment">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-cog"> </i></span>
+                                    <input type="text" class="form-control" placeholder="rpc port number" id="Address">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-cog"> </i></span>
+                                    <input type="text" class="form-control" placeholder="p2p port number" name="comment"
+                                        id="comment">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-cog"> </i></span>
+                                    <input type="text" class="form-control" placeholder="IP-Address" name="comment"
+                                        id="comment">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </form>
+                    </article>
+                </section>
+            </div>
+
+
+
+
         </div>
-        
-
-
-        <div class="col-md-9 well admin-content" id="ControlInfo">
-          <h2>Control Info</h2>
-          <p>RPC call through the komodo-cli software returning the object with various control details</p>            
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Chain Name</td>
-                <td>String</td>
-                <td>{{name}}</td>
-              </tr>
-              <tr>
-                <td>P2P Port</td>
-                <td>Numeric</td>
-                <td>{{p2pport}}</td>
-              </tr>
-                <tr>
-                <td>RPC Port</td>
-                <td>Numeric</td>
-                <td>{{rpcport}}</td>
-              </tr>
-               <tr>
-                  <td>Balance</td>
-                  <td>numeric</td>
-                  <td>{{balance}}</td>
-              </tr>
-               <tr>
-                  <td>Max Coin</td>
-                  <td>numeric</td>
-                  <td>{{premine}}</td>
-              </tr>
-
-              <tr>
-                <td>Version</td>
-                <td>Numeric</td>
-                <td>{{version}}</td>
-              </tr>
-              <tr>
-                <td>Protocolversion</td>
-                <td>Numeric</td>
-                <td>{{protocolversion}}</td>
-              </tr>
-              <tr>
-                <td>WalletVersion</td>
-                <td>Numeric</td>
-                <td>{{walletversion}}</td>
-              </tr>
-             
-              <tr>
-                  <td>Blocks</td>
-                  <td>Numeric</td>
-                  <td>{{blocks}}</td>
-              </tr>
-               <tr>
-                  <td>Connections</td>
-                  <td>numeric</td>
-                  <td>{{connections}}</td>
-              </tr>
-               <tr>
-                  <td>Difficulty</td>
-                  <td>numeric</td>
-                  <td>{{difficulty}}</td>
-              </tr>
-               <tr>
-                  <td>PayTx Fee</td>
-                  <td>numeric</td>
-                  <td>{{paytxfee}}</td>
-              </tr>
-               <tr>
-                  <td>Relay Fee</td>
-                  <td>numeric</td>
-                  <td>{{relayfee}}</td>
-              </tr>
-        
-            </tbody>
-          </table>
-        </div>
-        
-
-
-        <div class="jumbotron col-md-9 well admin-content" id="Settings">
-            <h3>
-            Here you can change the RPC configuration ! 
-            </h3>
-            <section id="inner-wrapper" class="RequestMoney">
-                <article>
-                    <form action="requestconfirm" method="GET">
-                           <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-cog"> </i></span>
-                                <input type="text" class="form-control" placeholder="userid" name="comment" id="comment">
-                            </div>
-                        </div>
-                           <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-cog"> </i></span>
-                                <input type="text" class="form-control" placeholder="password" name="comment" id="comment">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-cog"> </i></span>
-                                <input type="text" class="form-control" placeholder="rpc port number" id="Address">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-cog"> </i></span>
-                                <input type="text" class="form-control" placeholder="p2p port number" name="comment" id="comment">
-                            </div>
-                        </div>
-                           <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-cog"> </i></span>
-                                <input type="text" class="form-control" placeholder="IP-Address" name="comment" id="comment">
-                            </div>
-                        </div>
-                     
-                        <button type="submit" class="btn btn-success">Submit</button>
-                    </form>
-                </article>
-            </section>
-        </div>
-     
-   
 
 
     </div>
-
-   
-</div>
 </header>
-

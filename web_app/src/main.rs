@@ -329,26 +329,37 @@ fn user_index(user: User) -> Template {
 
 	let requested_amount = komodo::wallet::list_transactions(someUser.clone(), None, None, None, None).unwrap();
    	 let json: Value = serde_json::from_str(&requested_amount).unwrap();
-    
-   	 for n in 0..10
-   	 {
-        
-        // pick the 'result' value of the string, 
-        //      first index of the array, 
-        //      then the 'amount' value
-        let mut number = json["result"][n]["amount"].as_f64().unwrap();
-        
-        // take the result from json
-        let numList = &json["result"][n];
-        
-        // add a number to show ability to interact with the json result
-        //number += 1.0;
-        
-        println!("number: {:?}\n", number);
-        println!("numlist: {:?}\n\n", numList);
-        
-    	}
+	
+	context.insert("history_0_address", json["result"][0]["address"].to_string());
+    context.insert("history_0_amount", json["result"][0]["amount"].to_string());
+    context.insert("history_0_category", json["result"][0]["category"].to_string());
+    context.insert("history_0_txid", json["result"][0]["txid"].to_string());
 
+    
+	context.insert("history_1_address", json["result"][1]["address"].to_string());
+    context.insert("history_1_amount", json["result"][1]["amount"].to_string());
+    context.insert("history_1_category", json["result"][1]["category"].to_string());
+    context.insert("history_1_txid", json["result"][1]["txid"].to_string());
+
+    
+	context.insert("history_2_address", json["result"][2]["address"].to_string());
+    context.insert("history_2_amount", json["result"][2]["amount"].to_string());
+    context.insert("history_2_category", json["result"][2]["category"].to_string());
+    context.insert("history_2_txid", json["result"][2]["txid"].to_string());
+    
+    context.insert("history_3_address",  json["result"][3]["address"].to_string());
+    context.insert("history_3_amount",   json["result"][3]["amount"].to_string());
+    context.insert("history_3_category", json["result"][3]["category"].to_string());
+   	context.insert("history_3_txid",     json["result"][3]["txid"].to_string());
+
+
+    
+    context.insert("history_4_address",  json["result"][4]["address"].to_string());
+    context.insert("history_4_amount",   json["result"][4]["amount"].to_string());
+    context.insert("history_4_category", json["result"][4]["category"].to_string());
+    context.insert("history_4_txid",     json["result"][4]["txid"].to_string());
+       
+    
     Template::render("home_page", &context)
 }
 
