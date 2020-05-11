@@ -15,6 +15,8 @@ use rusqlite::{params, Connection, Result};
 use rustc_serialize::json::Json;
 use serde_json::Value as JsonValue;
 use std::collections::HashMap;
+use serde_json::Value;
+
 
 use rocket::http::{Cookie, Cookies};
 use rocket::outcome::IntoOutcome;
@@ -302,7 +304,7 @@ fn user_index(user: User) -> Template {
         control_json.find_path(&["relayfee"]).unwrap().to_string(),
     );
 
-    let something = komodo::wallet::list_address_groupings(someUser).unwrap();
+    let something = komodo::wallet::list_address_groupings(someUser.clone()).unwrap();
     let res = serde_json::from_str(&something);
     if res.is_ok() {
         let p: JsonValue = res.unwrap();
@@ -324,6 +326,28 @@ fn user_index(user: User) -> Template {
 
     //template to add
     //context.insert("variable_name",control_json.find_path(&["json_variable_name"]).unwrap().to_string(
+
+	let requested_amount = komodo::wallet::list_transactions(someUser.clone(), None, None, None, None).unwrap();
+   	 let json: Value = serde_json::from_str(&requested_amount).unwrap();
+    
+   	 for n in 0..10
+   	 {
+        
+        // pick the 'result' value of the string, 
+        //      first index of the array, 
+        //      then the 'amount' value
+        let mut number = json["result"][n]["amount"].as_f64().unwrap();
+        
+        // take the result from json
+        let numList = &json["result"][n];
+        
+        // add a number to show ability to interact with the json result
+        //number += 1.0;
+        
+        println!("number: {:?}\n", number);
+        println!("numlist: {:?}\n\n", numList);
+        
+    	}
 
     Template::render("home_page", &context)
 }
