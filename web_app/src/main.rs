@@ -164,18 +164,89 @@ fn user_index(user: User) -> Template {
         someJSONRPCVer,
         someRPCReqID,
     );
-    let requested_amount = komodo::wallet::get_balance(someUser, None, None);
-    println!("this is test");
-    println!("{:?}", requested_amount);
-    let mut context = HashMap::new();
-//   if (requested_amount.is_ok()) {
-//       let de_amnt: Amount = serde_json::from_str(&requested_amount).unwrap();
-         context.insert("amount", "de_amnt.result.to_string()");
-//   } else {
-//       context.insert("amount", "Error".to_string());
-//   }
-
-    Template::render("home_page", &context)
+    
+    //let mut context = HashMap::new();
+    let requested_amount = komodo::wallet::list_transactions(someUser.clone(), None, None, None, None).unwrap();
+    let json: Value = serde_json::from_str(&requested_amount).unwrap();
+    //context.insert("amount", json.find_path(&["result"]).unwrap().to_string());
+    //let content = json.data.children.values.content;
+    //let content = Vec::<MyStruct>::deserialize(&json["children"]["values"]).unwrap();
+    
+    //let result = serde_json::from_str(json_str);
+    //println!("result is {:?}\n", json["result"][12].test123());
+    
+    let mut transactionSize = 0;
+    let mut nLoop = 0;
+    
+    loop
+    {
+        
+        if format!("{}",(json["result"][nLoop])) != format!("Null") || 
+            format!("{}",(json["result"][nLoop])) != format!("null") 
+        {
+            
+            
+            
+            if format!("{}",(json["result"][nLoop + 1])) == format!("Null") ||
+                format!("{}",(json["result"][nLoop + 1])) == format!("null")
+            {
+                
+                break;
+                
+            }
+            transactionSize += 1;
+            nLoop += 1;
+        }
+        
+    }
+    
+    println!("ts {}", transactionSize);
+    println!("nl {}", nLoop);
+    
+    
+    //for n in 0..10
+    for n in 0..transactionSize + 1
+    {
+        println!("{}", n);
+        // check to see if there is a next value
+        if (format!("{}",(json["result"][n])) != format!("Null")) ||
+            (format!("{}",(json["result"][n])) != format!("null"))
+        {
+            // pick the 'result' value of the string, 
+            //      first index of the array, 
+            //      then the 'amount' value
+            let mut number = json["result"][n]["amount"].as_f64().unwrap();
+            
+            
+            // take the result from json
+            //let numList = &json["result"];
+            
+            // add a number to show ability to interact with the json result
+            //number += 1.0;
+            
+            println!("number: {:?}\n", number);//json.get("result")?.get("address")?.unwrap().to_string());
+            //println!("numlist: {:?}\n\n", numList);
+            
+            if format!("{}",(json["result"][n + 1])) == format!("Null") ||
+                format!("{}",(json["result"][n + 1])) == format!("null")
+            {
+                
+                break;
+                
+            }
+        }
+        
+    }
+    
+    
+    
+    /*
+    let control_info = komodo::control::get_info(someUser).unwrap();
+    let control_result = Json::from_str(&control_info).unwrap();
+    let control_json =
+        Json::from_str(&control_result.find_path(&["result"]).unwrap().to_string()).unwrap();
+    */
+    //list_transactions
 }
 
 #[get("/", rank = 2)]
